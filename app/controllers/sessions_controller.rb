@@ -8,9 +8,14 @@ class SessionsController < ApplicationController
 
   def create
     if @user && @user.authenticate(params[:password])
-      session[:user_id] = @user.id
-      flash[:success] = t('.success_login')
-      redirect_to root_url
+      if @user.email_confirmed
+        flash[:success] = t('.success_login')
+        session[:user_id] = @user.id
+        redirect_to root_url
+      else
+        flash.now[:warning] = t('.email_activation_warning')
+        render :new
+      end
     else
       flash.now[:warning] = t('.failed_login')
       render :new

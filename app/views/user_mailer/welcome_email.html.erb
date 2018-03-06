@@ -1,0 +1,8 @@
+<h1><%= t('.welcome') %> <%= @user.first_name  + " "  + @user.last_name %> </h1>
+<p>
+  <%= t('.success') %> <%= @user.first_name %> <br>
+</p>
+<p><%= t('.link') %></p>
+
+<%=confirm_email_user_url(@user.confirm_token) %>
+

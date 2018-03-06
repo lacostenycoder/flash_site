@@ -1,18 +1,31 @@
 en:
+
   login: 'Log In!'
   signup: 'Sign Up!'
 
   users:
     create:
-      success_signup: 'Thank you for signing up!'
+      success_signup: 'Thank you for signing up! Please confirm your email address to continue'
       failed_signup: 'Try again'
     prevent_signup: 'You are already signed up'
+    confirm_email:
+      email_confirm_success: 'Welcome to Flash Site! Your email has been confirmed!'
+      email_confirm_fail: 'Sorry user does not exist'
 
 
   sessions:
     create:
       success_login: 'Logged In!'
+      email_activation_warning: 'Please activate your account before logging in'
       failed_login: 'Email or password is invalid'
     destroy:
       logged_out: 'Logged out!'
     prevent_login: 'You are already logged in'
+
+  user_mailer:
+    welcome_email:
+      subject: 'Welcome'
+      welcome: 'Welcome to Flash Site,'
+      success: 'You have successfully signed up to Flash Site, your username is: '
+      link: 'Thanks for registering! To confirm your registration click the URL below.'
+
