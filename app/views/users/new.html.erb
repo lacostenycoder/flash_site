@@ -1,55 +1,49 @@
 <h1>Sign Up</h1>
 
 <%= form_for @user, html: {class: 'form-horizontal'} do |f| %>
-  <% if @user.errors.any? %>
-    <div class="error_messages">
-      <h4>Form is invalid</h4>
-    </div>
-  <% end %>
-
   <div class="field form-group">
-    <%= f.label :fname, class: 'col-sm-2 control-label' %>
+    <%= f.label :first_name, class: 'col-sm-2 control-label' %>
     <div class="col-sm-5">
-    <%= f.text_field :fname, class: 'form-control' %>
-    <%= error_message_on f.object, :fname%>
+      <%= f.text_field :first_name, class: 'form-control' %>
+      <%= error_message_on f.object, :first_name%>
     </div>
   </div>
 
   <div class="field form-group">
-    <%= f.label :lname, class: 'col-sm-2 control-label' %>
+    <%= f.label :last_name, class: 'col-sm-2 control-label' %>
     <div class="col-sm-5">
-    <%= f.text_field :lname, class: 'form-control' %>
-    <%= error_message_on f.object, :lname%>
+      <%= f.text_field :last_name, class: 'form-control' %>
+      <%= error_message_on f.object, :last_name%>
     </div>
   </div>
 
   <div class="field form-group">
     <%= f.label :email, class: 'col-sm-2 control-label' %>
     <div class="col-sm-5">
-    <%= f.text_field :email, class: 'form-control' %>
-    <%= error_message_on f.object, :email%>
+      <%= f.text_field :email, class: 'form-control' %>
+      <%= error_message_on f.object, :email%>
     </div>
   </div>
 
   <div class="field form-group">
     <%= f.label :password, class: 'col-sm-2 control-label' %>
     <div class="col-sm-5">
-    <%= f.password_field :password, class: 'form-control' %>
-    <%= error_message_on f.object, :password%>
+      <%= f.password_field :password, class: 'form-control' %>
+      <%= error_message_on f.object, :password%>
     </div>
   </div>
 
   <div class="field form-group">
     <%= f.label :password_confirmation, class: 'col-sm-2 control-label' %>
     <div class="col-sm-5">
-    <%= f.password_field :password_confirmation, class: 'form-control' %>
-    <%= error_message_on f.object, :password_confirmation%>
+      <%= f.password_field :password_confirmation, class: 'form-control' %>
+      <%= error_message_on f.object, :password_confirmation%>
     </div>
   </div>
 
   <div class="actions form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <%= f.submit 'Sign Up ', class: 'btn btn-primary' %>
+      <%= f.submit t('signup'), class: 'btn btn-primary' %>
     </div>
   </div>
 

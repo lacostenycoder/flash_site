@@ -1,5 +1,5 @@
 <h1>Log In</h1>
-<%= form_tag sessions_path do %>
+<%= form_tag login_path do %>
 
   <div class="field">
     <%= label_tag :email%><br>
@@ -13,7 +13,7 @@
 
   <div class="actions form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <%= submit_tag "Log In", class: 'btn btn-primary' %>
+      <%= submit_tag t('login'), class: 'btn btn-primary' %>
     </div>
   </div>
 

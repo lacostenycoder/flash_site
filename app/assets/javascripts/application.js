@@ -15,7 +15,3 @@
 //= require activestorage
 //= require_tree .
 //= require bootstrap-sprockets
-
-$( document ).ready(function() {
-
-});

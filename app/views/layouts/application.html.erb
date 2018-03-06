@@ -15,7 +15,7 @@
       </div>
       <div class="nav navbar-nav navbar-right">
         <% if current_user %>
-           <strong id= "user_name"><%= current_user.fname.capitalize %></strong> <%= link_to "Logout", logout_path%>
+           <strong id= "user_name"><%= current_user.first_name.capitalize %></strong> <%= link_to "Logout", logout_path%>
         <% else %>
           <%= link_to 'Sign Up', signup_path %> | <%= link_to 'Log In', login_path %>
         <% end %>
