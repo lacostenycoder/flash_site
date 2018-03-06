@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :prevent_current_user_from_signup
+  before_action :redirect_when_logged_in
 
   def new
     @user = User.new
@@ -23,7 +23,7 @@ class UsersController < ApplicationController
       params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
     end
 
-    def prevent_current_user_from_signup
+    def redirect_when_logged_in
       if current_user
         flash[:warning] = t('users.prevent_signup')
         redirect_to root_url

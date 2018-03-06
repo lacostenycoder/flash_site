@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
 
-  before_action :prevent_current_user_from_login, only: [:new, :create]
-  before_action :find_current_user, only: :create
+  before_action :redirect_when_logged_in, only: [:new, :create]
+  before_action :find_user, only: :create
 
   def new
   end
@@ -24,14 +24,14 @@ class SessionsController < ApplicationController
   end
 
   private
-    def prevent_current_user_from_login
+    def redirect_when_logged_in
       if current_user
         flash[:warning] = t('sessions.prevent_login')
         redirect_to root_url
       end
     end
 
-    def find_current_user
+    def find_user
       @user = User.find_by(email: params[:email])
     end
 end
