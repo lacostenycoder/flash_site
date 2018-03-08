@@ -1,0 +1,7 @@
+<h2>Welcome
+  <% if current_user %>
+    <%= current_user.first_name %>
+  <% else %>
+    Guest
+  <% end %>
+</h2>
