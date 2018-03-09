@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   validates :first_name, :last_name, presence: true, length: { maximum: 255 }
   validates :email, presence: true, uniqueness: true
-  validates :password, allow_nil: true, presence: true
+  validates :password, :password_confirmation, presence: true, on: :update
   has_secure_password
 
   before_create :set_confirm_token
@@ -25,4 +25,5 @@ class User < ApplicationRecord
     def send_registration_mail
       UserMailer.registration_mail(id).deliver_later
     end
+
 end
