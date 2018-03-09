@@ -1,10 +1,16 @@
 class User < ApplicationRecord
+<<<<<<< HEAD
   FORGOT_PASSWORD_LINK_EXPIRY_TIME = 24.hours
   validates :first_name, :last_name, :email, presence: true
   validates :first_name, :last_name, length: { maximum: 255 }, allow_blank: true
   validates :email, uniqueness: true, allow_blank: true
   validates :password, :password_confirmation, presence: true, on: :update
 
+=======
+  validates :first_name, :last_name, presence: true, length: { maximum: 255 }
+  validates :email, presence: true, uniqueness: true
+  validates :password, :password_confirmation, presence: true, on: :update
+>>>>>>> add forgot password functionality
   has_secure_password
 
   before_create :set_confirm_token
