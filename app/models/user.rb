@@ -4,18 +4,20 @@ class User < ApplicationRecord
   validates :password, allow_nil: true, presence: true
   has_secure_password
 
-  before_create :confirmation_token
+  before_create :set_confirm_token
+  after_commit :send_registration_mail
 
-  def email_activate
-    self.email_confirmed = true
+  def email_activated
     self.confirm_token = nil
     save!(validate: false)
   end
 
   private
-    def confirmation_token
-      if self.confirm_token.blank?
-        self.confirm_token = SecureRandom.urlsafe_base64.to_s
-      end
+    def set_confirm_token
+      self.confirm_token ||= SecureRandom.urlsafe_base64.to_s
+    end
+
+    def send_registration_mail
+      UserMailer.registration_mail(id).deliver_later
     end
 end

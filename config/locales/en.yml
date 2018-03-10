@@ -9,8 +9,8 @@ en:
       failed_signup: 'Try again'
     prevent_signup: 'You are already signed up'
     confirm_email:
-      email_confirm_success: 'Welcome to Flash Site! Your email has been confirmed!'
-      email_confirm_fail: 'Sorry user does not exist'
+      success: 'Welcome to Flash Site! Your email has been confirmed!'
+      fail: 'Sorry user does not exist'
 
 
   sessions:
@@ -23,9 +23,9 @@ en:
     prevent_login: 'You are already logged in'
 
   user_mailer:
-    welcome_email:
+    registration_mail:
       subject: 'Welcome'
       welcome: 'Welcome to Flash Site,'
-      success: 'You have successfully signed up to Flash Site, your username is: '
+      success: 'You have successfully signed up to Flash Site '
       link: 'Thanks for registering! To confirm your registration click the URL below.'
 

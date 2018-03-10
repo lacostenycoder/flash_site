@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'jayanti@vinsol.com'
+  default from: DEFAULT_SENDER
   layout 'mailer'
 end

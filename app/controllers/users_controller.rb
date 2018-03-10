@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-
   before_action :redirect_when_logged_in
+  before_action :find_user_by_confirm_token, only: :confirm_email
 
   def new
     @user = User.new
@@ -9,7 +9,6 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      UserMailer.welcome_email(@user).deliver_now!
       flash[:success] = t('.success_signup')
       redirect_to root_url
     else
@@ -19,13 +18,11 @@ class UsersController < ApplicationController
   end
 
   def confirm_email
-    user = User.find_by(confirm_token: params[:id])
-    if user
-      user.email_activate
-      flash[:success] = t('.email_confirm_success')
+    if @user && @user.email_activated
+      flash[:success] = t('.success')
       redirect_to login_url
     else
-      flash[:error] = t('.email_confirm_fail')
+      flash[:warning] = t('.fail')
       redirect_to root_url
     end
   end
@@ -40,5 +37,9 @@ class UsersController < ApplicationController
         flash[:warning] = t('users.prevent_signup')
         redirect_to root_url
       end
+    end
+
+    def find_user_by_confirm_token
+      @user = User.find_by(confirm_token: params[:id])
     end
 end

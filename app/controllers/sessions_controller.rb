@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
 
   def create
     if @user && @user.authenticate(params[:password])
-      if @user.email_confirmed
+      unless @user.confirm_token
         flash[:success] = t('.success_login')
         session[:user_id] = @user.id
         redirect_to root_url
