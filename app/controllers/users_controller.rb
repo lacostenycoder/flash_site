@@ -38,7 +38,7 @@ class UsersController < ApplicationController
       # because i want to skip validations, as i created validation checks for password and password confirmation which aren't actual columns in the db  table users
       @user.update_attribute(:reset_password_token, SecureRandom.urlsafe_base64.to_s)
       @user.update_attribute(:reset_password_token_set_at, Time.current)
-      UserMailer.forgot_password(@user).deliver_later!
+      UserMailer.forgot_password(@user).deliver_later
       flash[:success] = t('.email_instructions')
       redirect_to login_url
     else
@@ -52,7 +52,7 @@ class UsersController < ApplicationController
       flash[:warning] = t('.password_link_expired')
       redirect_to  login_url
     end
-    if @user
+    if @user && @user.update_attribute(:reset_password_token, nil)
       render 'reset_password'
     else
       flash[:warning] = t('.user_not_recognised')
