@@ -48,12 +48,13 @@ class UsersController < ApplicationController
   end
 
   def reset_password
-    if (Time.current - @user.reset_password_token_set_at) > 24.hours
-      flash[:warning] = t('.password_link_expired')
-      redirect_to  login_url
-    end
     if @user && @user.update_attribute(:reset_password_token, nil)
-      render 'reset_password'
+      if (Time.current - @user.reset_password_token_set_at) > 1.minute
+        flash[:warning] = t('.password_link_expired')
+        redirect_to  login_url
+      else
+        render 'reset_password'
+      end
     else
       flash[:warning] = t('.user_not_recognised')
       redirect_to login_url
