@@ -2,13 +2,18 @@
 <%= form_tag login_path do %>
 
   <div class="field">
-    <%= label_tag :email%><br>
-      <%= text_field_tag :email%>
+    <%= label_tag :email %><br>
+    <%= text_field_tag :email %>
+  </div>
+
+  <div class="field">
+    <%= label_tag :password %><br>
+    <%= password_field_tag :password %>
   </div>
 
   <div class="field form-group">
-    <%= label_tag :password %><br>
-      <%= password_field_tag :password %>
+    <%= label_tag :remember_me %><br>
+    <%= check_box_tag :remember_me %>
   </div>
 
   <div class="actions form-group">
@@ -24,4 +29,5 @@
   </div>
 
 <% end %>
+
 
