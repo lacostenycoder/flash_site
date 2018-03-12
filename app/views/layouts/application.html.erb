@@ -15,9 +15,11 @@
       </div>
       <div class="nav navbar-nav navbar-right">
         <% if current_user %>
-           <strong id= "user_name"><%= current_user.first_name.capitalize %></strong> <%= link_to "Logout", logout_path %>
+           <li class="navbar-text"><strong id= "user_name"><%= current_user.first_name.capitalize %></strong> </li>
+           <li><%= link_to "Logout", logout_path %></li>
         <% else %>
-          <%= link_to 'Sign Up', signup_path %> | <%= link_to 'Log In', login_path %>
+          <li><%= link_to 'Sign Up', signup_path %></li>
+          <li><%= link_to 'Log In', login_path %></li>
         <% end %>
       </div>
     </div>

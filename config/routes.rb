@@ -4,5 +4,7 @@ Rails.application.routes.draw do
   post '/login', to:'sessions#create'
   get '/logout', to: 'sessions#destroy'
   get '/signup', to: 'users#new'
-  resources :users
+  resources :users do
+    get :confirm_email, on: :member
+  end
 end

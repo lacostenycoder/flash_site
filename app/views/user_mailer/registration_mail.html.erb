@@ -1,0 +1,4 @@
+<h1><%= t('.welcome') %> <%= @user.fullname %></h1>
+<p><%= t('.success') %><br></p>
+<p><%= t('.link') %></p>
+<%= confirm_email_user_url(@user.confirm_token) %>
