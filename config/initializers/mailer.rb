@@ -1,1 +1,1 @@
-DEFAULT_SENDER = "jayanti@vinsol.com"
+DEFAULT_SENDER = ENV["DEFAULT_SENDER"]

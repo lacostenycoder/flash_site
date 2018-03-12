@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
   def create
     if @user && @user.authenticate(params[:password])
       unless @user.confirm_token
-        flash[:success] = t('.success_login')
+        flash[:success] = t('.success')
         session[:user_id] = @user.id
         redirect_to root_url
       else
@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
         render :new
       end
     else
-      flash.now[:warning] = t('.failed_login')
+      flash.now[:warning] = t('.failure')
       render :new
     end
   end
