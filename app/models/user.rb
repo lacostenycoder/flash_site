@@ -10,7 +10,7 @@ class User < ApplicationRecord
   delegate :fullname, to: :presenter
 
   def activate_email
-    update_column(confirm_token: nil)
+    update_columns(confirm_token: nil)
   end
 
   def presenter
