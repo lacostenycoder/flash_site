@@ -3,8 +3,9 @@ class Admin::BaseController < ApplicationController
 
     private
       def ensure_admin
-        unless current_user && current_user.type == 'admin'
-          redirect_to root_url, notice: 'Only admin'
+        unless current_user && current_user.type == 'Admin'
+          flash[:warning] = t('admin.restricted_access')
+          redirect_to root_url
         end
       end
 end
