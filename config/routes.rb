@@ -6,5 +6,9 @@ Rails.application.routes.draw do
   get '/signup', to: 'users#new'
   resources :users do
     get :confirm_email, on: :member
+    get :reset_password, on: :member
+    get :forgot_password, on: :collection
+    post :send_reset_password_email, on: :collection
+    patch :update_password, on: :member
   end
 end

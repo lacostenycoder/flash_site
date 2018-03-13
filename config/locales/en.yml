@@ -11,7 +11,16 @@ en:
     confirm_email:
       success: 'Welcome to Flash Site! Your email has been confirmed!'
       failure: 'Sorry user does not exist'
-
+    send_reset_password_email:
+      email_instructions: 'Please check your email for instructions on resetting password'
+      no_email: 'No such email exists'
+    reset_password:
+      password_link_expired: 'Your password reset link has expired. Try again'
+      user_not_recognised: 'User not recognised. Try again'
+      confirm_reset_password: "Confirm"
+    update_password:
+      success: 'Your password was successfully updated.'
+      failure: 'Try again'
 
   sessions:
     create:
@@ -28,4 +37,8 @@ en:
       welcome: 'Welcome to Flash Site,'
       success: 'You have successfully signed up to Flash Site '
       link: 'Thanks for registering! To confirm your registration click the URL below.'
-
+    forgot_password:
+      subject: 'Forgot password?'
+      greeting: 'Hello'
+      link: 'Click the link below to reset your password'
+      time_expiration: 'Please note that this link will only work for 24 hours'
