@@ -8,11 +8,8 @@ class SessionsController < ApplicationController
   def create
     if @user && @user.authenticate(params[:password])
       unless @user.confirm_token
-        if params[:remember_me]
-          cookies.permanent.signed[:user_id] = @user.id
-        end
+        set_cookie
         flash[:success] = t('.success')
-        session[:user_id] = @user.id
         redirect_to root_url
       else
         flash.now[:warning] = t('.email_activation_warning')
@@ -41,5 +38,13 @@ class SessionsController < ApplicationController
 
     def find_user
       @user = User.find_by(email: params[:email])
+    end
+
+    def set_cookie
+      if params[:remember_me]
+        cookies.permanent.signed[:user_id] = @user.id
+      else
+        session[:user_id] = @user.id
+      end
     end
 end
