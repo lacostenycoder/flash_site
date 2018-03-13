@@ -7,8 +7,8 @@ class User < ApplicationRecord
 
   has_secure_password
 
-  before_create :set_confirm_token
-  after_commit :send_registration_mail
+  before_create :set_confirm_token, unless: :user_is_admin?
+  after_commit :send_registration_mail, unless: :user_is_admin?
 
   delegate :fullname, to: :presenter
   attr_accessor :remember_me
@@ -41,6 +41,10 @@ class User < ApplicationRecord
 
     def send_registration_mail
       UserMailer.registration_mail(id).deliver_later
+    end
+
+    def user_is_admin?
+      type == 'Admin'
     end
 
 end

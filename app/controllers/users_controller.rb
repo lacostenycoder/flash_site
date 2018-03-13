@@ -6,11 +6,11 @@ class UsersController < ApplicationController
   before_action :find_user_by_id, only: :update_password
 
   def new
-    @user = User.new
+    @user = Customer.new
   end
 
   def create
-    @user = User.new(user_params)
+    @user = Customer.new(user_params)
     if @user.save
       flash[:success] = t('.success')
       redirect_to root_url
@@ -69,7 +69,7 @@ class UsersController < ApplicationController
 
   private
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+      params.require(:customer).permit(:first_name, :last_name, :email, :password, :password_confirmation)
     end
 
     def redirect_when_logged_in
