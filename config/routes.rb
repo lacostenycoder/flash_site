@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   post '/login', to:'sessions#create'
   get '/logout', to: 'sessions#destroy'
   get '/signup', to: 'users#new'
-  resources :customers do
+  resources :customers, controller: 'users', type: 'customer' do
     get :confirm_email, on: :member
     get :reset_password, on: :member
     get :forgot_password, on: :collection
@@ -16,6 +16,4 @@ Rails.application.routes.draw do
     root 'users#index'
     resources :users
   end
-
-  post '/customers', to: 'users#create'
 end
