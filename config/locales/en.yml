@@ -19,7 +19,7 @@ en:
       password_link_expired: 'Your password reset link has expired. Try again'
       user_not_recognised: 'User not recognised. Try again'
       confirm_reset_password: "Confirm"
-    update:
+    update_password:
       success: 'Your password was successfully updated.'
 
   sessions:

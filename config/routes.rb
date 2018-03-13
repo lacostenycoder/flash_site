@@ -9,5 +9,6 @@ Rails.application.routes.draw do
     get :reset_password, on: :member
     get :forgot_password, on: :collection
     post :send_reset_password_email, on: :collection
+    patch :update_password, on: :member
   end
 end

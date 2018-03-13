@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :find_user_by_confirm_token, only: :confirm_email
   before_action :find_user_by_email, only: :send_reset_password_email
   before_action :find_user_by_reset_password_token, only: :reset_password
-  before_action :find_user_by_id, only: :update
+  before_action :find_user_by_id, only: :update_password
 
   def new
     @user = User.new
@@ -35,10 +35,7 @@ class UsersController < ApplicationController
 
   def send_reset_password_email
     if @user
-      # because i want to skip validations, as i created validation checks for password and password confirmation which aren't actual columns in the db  table users
-      @user.update_attribute(:reset_password_token, SecureRandom.urlsafe_base64.to_s)
-      @user.update_attribute(:reset_password_token_set_at, Time.current)
-      UserMailer.forgot_password(@user).deliver_later
+      @user.send_forgot_password_email
       flash[:success] = t('.email_instructions')
       redirect_to login_url
     else
@@ -48,8 +45,8 @@ class UsersController < ApplicationController
   end
 
   def reset_password
-    if @user && @user.update_attribute(:reset_password_token, nil)
-      if (Time.current - @user.reset_password_token_set_at) > 1.minute
+    if @user && @user.nullify_reset_password_token
+      if @user.time_since_forgot_password_link_sent > User::FORGOT_PASSWORD_LINK_EXPIRY_TIME
         flash[:warning] = t('.password_link_expired')
         redirect_to  login_url
       else
@@ -61,7 +58,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def update
+  def update_password
     if @user.update(user_params)
       flash[:success] = t('.success')
       redirect_to login_url
