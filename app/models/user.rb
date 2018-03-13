@@ -7,9 +7,14 @@ class User < ApplicationRecord
   before_create :set_confirm_token
   after_commit :send_registration_mail
 
-  def email_activated
-    self.confirm_token = nil
-    save!(validate: false)
+  delegate :fullname, to: :presenter
+
+  def activate_email
+    update_columns(confirm_token: nil)
+  end
+
+  def presenter
+    @presenter ||= UserPresenter.new(self)
   end
 
   private

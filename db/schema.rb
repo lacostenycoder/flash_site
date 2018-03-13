@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 2018_03_10_060628) do
     t.string "confirm_token"
     t.string "reset_password_token"
     t.datetime "reset_password_token_set_at"
+    t.string "type"
+    t.index ["confirm_token"], name: "index_users_on_confirm_token"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

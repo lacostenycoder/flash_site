@@ -12,20 +12,20 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      flash[:success] = t('.success_signup')
+      flash[:success] = t('.success')
       redirect_to root_url
     else
-      flash.now[:info] = t('.failed_signup')
+      flash.now[:info] = t('.failure')
       render :new
     end
   end
 
   def confirm_email
-    if @user && @user.email_activated
+    if @user && @user.activate_email
       flash[:success] = t('.success')
       redirect_to login_url
     else
-      flash[:warning] = t('.fail')
+      flash[:warning] = t('.failure')
       redirect_to root_url
     end
   end

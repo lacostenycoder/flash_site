@@ -5,11 +5,12 @@ en:
 
   users:
     create:
-      success_signup: 'Thank you for signing up! Please confirm your email address to continue'
-      failed_signup: 'Try again'
+      success: 'Thank you for signing up! Please confirm your email address to continue'
+      failure: 'Try again'
     prevent_signup: 'You are already signed up'
     confirm_email:
       success: 'Welcome to Flash Site! Your email has been confirmed!'
+      failure: 'Sorry user does not exist'
       fail: 'Sorry user does not exist'
     send_reset_password_email:
       email_instructions: 'Please check your email for instructions on resetting password'
@@ -23,9 +24,9 @@ en:
 
   sessions:
     create:
-      success_login: 'Logged In!'
+      success: 'Logged In!'
       email_activation_warning: 'Please activate your account before logging in'
-      failed_login: 'Email or password is invalid'
+      failure: 'Email or password is invalid'
     destroy:
       logged_out: 'Logged out!'
     prevent_login: 'You are already logged in'
