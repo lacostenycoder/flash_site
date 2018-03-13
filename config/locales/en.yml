@@ -11,7 +11,6 @@ en:
     confirm_email:
       success: 'Welcome to Flash Site! Your email has been confirmed!'
       failure: 'Sorry user does not exist'
-      fail: 'Sorry user does not exist'
     send_reset_password_email:
       email_instructions: 'Please check your email for instructions on resetting password'
       no_email: 'No such email exists'
@@ -21,6 +20,7 @@ en:
       confirm_reset_password: "Confirm"
     update_password:
       success: 'Your password was successfully updated.'
+      failure: 'Try again'
 
   sessions:
     create:

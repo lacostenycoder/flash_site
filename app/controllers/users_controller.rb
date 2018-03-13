@@ -34,8 +34,7 @@ class UsersController < ApplicationController
   end
 
   def send_reset_password_email
-    if @user
-      @user.send_forgot_password_email
+    if @user && @user.send_forgot_password_email
       flash[:success] = t('.email_instructions')
       redirect_to login_url
     else
@@ -46,7 +45,7 @@ class UsersController < ApplicationController
 
   def reset_password
     if @user && @user.nullify_reset_password_token
-      if @user.time_since_forgot_password_link_sent > User::FORGOT_PASSWORD_LINK_EXPIRY_TIME
+      if @user.reset_password_link_expired?
         flash[:warning] = t('.password_link_expired')
         redirect_to  login_url
       else
@@ -63,6 +62,7 @@ class UsersController < ApplicationController
       flash[:success] = t('.success')
       redirect_to login_url
     else
+      flash.now[:warning] = t('.failure')
       render 'reset_password'
     end
   end
