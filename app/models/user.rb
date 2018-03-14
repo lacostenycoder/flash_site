@@ -11,6 +11,7 @@ class User < ApplicationRecord
   after_commit :send_registration_mail
 
   delegate :fullname, to: :presenter
+  attr_accessor :remember_me
 
   def activate_email
     update_columns(confirm_token: nil)

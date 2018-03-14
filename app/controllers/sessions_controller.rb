@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-
   before_action :redirect_when_logged_in, only: [:new, :create]
   before_action :find_user, only: :create
 
@@ -9,8 +8,8 @@ class SessionsController < ApplicationController
   def create
     if @user && @user.authenticate(params[:password])
       unless @user.confirm_token
+        set_cookie_and_session
         flash[:success] = t('.success')
-        session[:user_id] = @user.id
         redirect_to root_url
       else
         flash.now[:warning] = t('.email_activation_warning')
@@ -24,6 +23,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
+    cookies.delete :user_id
     flash[:success] = t('.logged_out')
     redirect_to root_url
   end
@@ -38,5 +38,13 @@ class SessionsController < ApplicationController
 
     def find_user
       @user = User.find_by(email: params[:email])
+    end
+
+    def set_cookie_and_session
+      if params[:remember_me]
+        cookies.permanent.signed[:user_id] = @user.id
+      else
+        session[:user_id] = @user.id
+      end
     end
 end
