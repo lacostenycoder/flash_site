@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
   def create
     if @user && @user.authenticate(params[:password])
       unless @user.confirm_token
-        set_cookie
+        remember_user
         flash[:success] = t('.success')
         redirect_to root_url
       else
@@ -40,7 +40,7 @@ class SessionsController < ApplicationController
       @user = User.find_by(email: params[:email])
     end
 
-    def set_cookie
+    def remember_user
       if params[:remember_me]
         cookies.permanent.signed[:user_id] = @user.id
       else
