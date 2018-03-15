@@ -16,7 +16,7 @@ class Deal < ApplicationRecord
 
   def is_publishable?
     if images.size >= 2 && quantity > 10 && deals_on_same_date < 3
-      self.update_columns(state: :publishable)
+      self.state = :publishable
     end
   end
 
@@ -33,13 +33,13 @@ class Deal < ApplicationRecord
 
   def check_deal_publishability
     if !is_publishable?
-      errors.add(:base, "can't be updated")
+      errors.add(:base, t('.not_publishable'))
       throw :abort
     end
 
     if published? || over?
       if publish_date_changed?
-        errors.add(:base, "publish date cannot be changed")
+        errors.add(:base, t('.publish_date_readonly'))
         throw :abort
       end
     end
