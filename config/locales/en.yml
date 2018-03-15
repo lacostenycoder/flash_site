@@ -45,3 +45,21 @@ en:
 
   admin:
     restricted_access: 'Only Admin can access here'
+    deals:
+      create:
+        success: "Deal successfully created"
+        failure: "Deal not created. Try again"
+      update:
+        success: "Deal successfully updated"
+      destroy:
+        destroyed: "Deal successfully destroyed"
+
+  activerecord:
+    errors:
+      models:
+        deal:
+          attributes:
+            base:
+              not_publishable: "Deal is not publishable"
+              publish_date_readonly: "Publish date cannot be changed now"
+

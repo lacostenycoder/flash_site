@@ -15,9 +15,10 @@ class Admin::DealsController < Admin::BaseController
     @deal = Deal.new(deal_params)
     @deal.created_by = current_user.id
     if @deal.save
+      flash[:success] = t('.success')
       redirect_to admin_deals_url
     else
-      flash.now[:warning] = "Deal not created. Try again"
+      flash.now[:warning] = t('.failure')
       render :new
     end
   end
@@ -25,7 +26,7 @@ class Admin::DealsController < Admin::BaseController
   def update
     @deal = Deal.find(params[:id])
     if @deal.update(deal_params)
-      flash[:success] = 'Deal successfully updated'
+      flash[:success] = t('.success')
       redirect_to admin_deals_url
     else
       flash.now[:warning] = @deal.errors[:base]
@@ -37,7 +38,7 @@ class Admin::DealsController < Admin::BaseController
   def destroy
     @deal = Deal.find(params[:id])
     if @deal.destroy
-      flash[:success] = 'Deal destroyed'
+      flash[:success] = t(".destroyed")
       redirect_to admin_deals_url
     end
   end
