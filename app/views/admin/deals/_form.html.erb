@@ -1,0 +1,50 @@
+<%= form_for [:admin, @deal] do |f| %>
+
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= f.label :price %>
+    <%= f.number_field :price %>
+  </div>
+
+  <div class="field">
+    <%= f.label :discounted_price %>
+    <%= f.number_field :discounted_price %>
+  </div>
+
+  <div class="field">
+    <%= f.label :quantity %>
+    <%= f.number_field :quantity %>
+  </div>
+
+  <div class="field">
+    <%= f.label :publish_date %>
+    <%= f.date_select :publish_date %>
+  </div>
+
+  <div class="field">
+    <% unless @deal.images.any? %>
+    <%= f.fields_for :images do |builder| %>
+      <%= render 'deal_images', f: builder %>
+    <% end %>
+    <% end %>
+  </div>
+
+  <% @deal.images.each do |image| %>
+    <%= image_tag image.attachment.url(:thumb) %>
+  <% end %>
+
+  <%= link_to_add_images "Add Image", f, :images %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

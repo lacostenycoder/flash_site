@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_03_14_054652) do
+ActiveRecord::Schema.define(version: 2018_03_15_071301) do
 
   create_table "deals", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
@@ -18,14 +18,19 @@ ActiveRecord::Schema.define(version: 2018_03_14_054652) do
     t.decimal "price", precision: 10
     t.decimal "discounted_price", precision: 10
     t.integer "quantity"
-    t.datetime "publish_date"
+    t.date "publish_date"
     t.integer "state"
     t.string "code"
     t.bigint "created_by"
-    t.string "image_file_name"
-    t.string "image_content_type"
-    t.integer "image_file_size"
-    t.datetime "image_updated_at"
+  end
+
+  create_table "images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "deal_id"
+    t.string "attachment_file_name"
+    t.string "attachment_content_type"
+    t.integer "attachment_file_size"
+    t.datetime "attachment_updated_at"
+    t.index ["deal_id"], name: "index_images_on_deal_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

@@ -21,19 +21,26 @@
   </nav>
 
 
-  <div class="container-fluid">
-    <body>
-      <div class="sidenav">
-      <%= link_to 'Deals', admin_deals_path %>
-      </div>
-      <div class="main">
-        <div>
-            <% flash.each do |name, msg| %>
-              <%= content_tag :div, msg, class: "alert alert-#{name}" %>
-            <% end %>
+    <body class="container-fluid">
+
+      <div class="row all">
+
+        <div class="col-xs-2 sidenav">
+          <%= link_to 'Deals', admin_deals_path %>
         </div>
-        <%= yield %>
+
+        <div class="col-xs-10 main">
+          <div>
+              <% flash.each do |name, msg| %>
+                <%= content_tag :div, msg, class: "alert alert-#{name}" %>
+              <% end %>
+          </div>
+          <div class="content">
+            <%= yield %>
+          </div>
+        </div>
+
       </div>
+
     </body>
-  </div>
 </html>
