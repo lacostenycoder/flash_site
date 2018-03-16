@@ -4,11 +4,12 @@ class User < ApplicationRecord
   validates :first_name, :last_name, length: { maximum: 255 }, allow_blank: true
   validates :email, uniqueness: true, allow_blank: true
   validates :password, :password_confirmation, presence: true, on: :update
+  validates :type, inclusion: { in: %w(Customer Admin) }
 
   has_secure_password
 
-  before_create :set_confirm_token, unless: :user_is_admin?
-  after_commit :send_registration_mail, unless: :user_is_admin?
+  before_create :set_confirm_token, unless: :admin?
+  after_commit :send_registration_mail, unless: :admin?
 
   delegate :fullname, to: :presenter
   attr_accessor :remember_me
@@ -34,6 +35,10 @@ class User < ApplicationRecord
     update_attribute(:reset_password_token, nil)
   end
 
+    def admin?
+      type == 'Admin'
+    end
+
   private
     def set_confirm_token
       self.confirm_token ||= SecureRandom.urlsafe_base64.to_s
@@ -42,9 +47,4 @@ class User < ApplicationRecord
     def send_registration_mail
       UserMailer.registration_mail(id).deliver_later
     end
-
-    def user_is_admin?
-      type == 'Admin'
-    end
-
 end

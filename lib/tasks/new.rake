@@ -1,5 +1,5 @@
 namespace :admin do
-  desc "creates admin"
+  desc "creates admin-> rake admin:new"
   task :new => :environment do
     puts "Enter Admin details: "
     puts "enter first name:"
@@ -13,6 +13,12 @@ namespace :admin do
     puts "enter password confirmation:"
     password_confirmation = STDIN.gets.chomp
 
-    Admin.create!(first_name: first_name, last_name: last_name, email: email, password: password, password_confirmation: password_confirmation)
+    admin = Admin.new(first_name: first_name, last_name: last_name, email: email, password: password, password_confirmation: password_confirmation)
+
+    if admin.save
+        puts "Admin successfully created"
+    else
+        puts admin.errors.full_messages
+    end
   end
 end

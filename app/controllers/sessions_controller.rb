@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
       unless @user.confirm_token
         set_cookie
         flash[:success] = t('.success')
-        if current_user.type == 'Admin'
+        if current_user.admin?
           redirect_to admin_root_url
         else
           redirect_to root_url
