@@ -5,21 +5,6 @@ class UsersController < ApplicationController
   before_action :find_user_by_reset_password_token, only: :reset_password
   before_action :find_user_by_id, only: :update_password
 
-  def new
-    @user = Customer.new
-  end
-
-  def create
-    @user = Customer.new(user_params)
-    if @user.save
-      flash[:success] = t('.success')
-      redirect_to root_url
-    else
-      flash.now[:info] = t('.failure')
-      render :new
-    end
-  end
-
   def confirm_email
     if @user && @user.activate_email
       flash[:success] = t('.success')
@@ -69,7 +54,7 @@ class UsersController < ApplicationController
 
   private
     def user_params
-      params.require(:customer).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
     end
 
     def redirect_when_logged_in

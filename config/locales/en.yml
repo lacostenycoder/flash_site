@@ -22,6 +22,11 @@ en:
       success: 'Your password was successfully updated.'
       failure: 'Try again'
 
+  customers:
+    create:
+      success: 'Thank you for signing up! Please confirm your email address to continue'
+      failure: 'Try again'
+
   sessions:
     create:
       success: 'Logged In!'
