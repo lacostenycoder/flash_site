@@ -8,9 +8,6 @@ class User < ApplicationRecord
 
   has_secure_password
 
-  before_create :set_confirm_token, unless: :admin?
-  after_commit :send_registration_mail, unless: :admin?
-
   delegate :fullname, to: :presenter
   attr_accessor :remember_me
 
@@ -35,16 +32,7 @@ class User < ApplicationRecord
     update_attribute(:reset_password_token, nil)
   end
 
-    def admin?
-      type == 'Admin'
-    end
-
-  private
-    def set_confirm_token
-      self.confirm_token ||= SecureRandom.urlsafe_base64.to_s
-    end
-
-    def send_registration_mail
-      UserMailer.registration_mail(id).deliver_later
-    end
+  def admin?
+    type == 'Admin'
+  end
 end
