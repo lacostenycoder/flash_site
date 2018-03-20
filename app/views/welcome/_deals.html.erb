@@ -1,0 +1,33 @@
+<div class="row">
+  <% deals.each do |deal| %>
+    <div class="col-md-4">
+      <div class="thumbnail ">
+
+        <div class="slideshow-container center-block">
+          <% deal.images.each do |image| %>
+            <div class="myslides">
+              <%= image_tag image.attachment.url(:medium) %>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="caption">
+          <h4 class="pull-left"><%= number_to_currency deal.discounted_price, locale: :in %></h4>
+
+          <%= form_tag line_items_path do %>
+            <%= hidden_field_tag :deal_id, deal.id %>
+            <%= hidden_field_tag :price, deal.discounted_price %>
+            <div class="deal-buy pull-right">
+              <%= submit_tag "Buy" %>
+            </div>
+          <% end %>
+
+          <div class="deal-description">
+            <%= deal.description %>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  <% end %>
+</div>

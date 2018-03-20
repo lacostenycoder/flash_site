@@ -1,4 +1,4 @@
-<%= form_for [:admins, @deal],  html: {class: 'form-horizontal'} do |f| %>
+<%= form_for [:admin, @deal],  html: {class: 'form-horizontal'} do |f| %>
 
   <div class="field form-group">
     <%= f.label :title, class: 'col-sm-2 control-label' %>
@@ -48,25 +48,22 @@
     </div>
   </div>
 
-  <div class="field">
+  <div class="field form-group">
+    <% unless @deal.images.any? %>
       <%= f.fields_for :images do |builder| %>
-        <% unless @deal.images.any? %>
-          <%= render 'images', f: builder %>
-        <% else %>
-           <fieldset>
-            <%= image_tag builder.object.attachment.url(:thumb) %>
-            <%= builder.hidden_field :_destroy %>
-            <%= link_to "remove", "#", class: "remove_image" %>
-            </fieldset>
-        <% end %>
+        <%= render 'deal_images', f: builder %>
+      <% end %>
     <% end %>
   </div>
 
-  <%= link_to_add_images "add_images", f, :images %>
+  <% @deal.images.each do |image| %>
+    <%= image_tag image.attachment.url(:thumb) %>
+  <% end %>
+
+  <%= link_to_add_images "Add Image", f, :images %>
 
   <div class="actions">
     <%= f.submit class: 'btn btn-primary' %>
   </div>
-
 <% end %>
-<%= javascript_include_tag 'admins/deals/form' %>
+

@@ -14,9 +14,16 @@ Rails.application.routes.draw do
 
   resources :customers, only: :create
 
+  get '/buy/:id', to: 'deals#buy', as: :buy
+
+  resources :orders
+  resources :line_items
+  resources :deals
+
   namespace :admins do
     root 'dashboard#index'
     resources :users
     resources :deals
   end
 end
+

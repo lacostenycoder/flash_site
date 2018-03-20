@@ -1,10 +1,10 @@
-<fieldset>
-  <div class="field form-group">
-    <%= f.label :attachment, "Image File", class: 'col-sm-2 control-label'  %>
-    <div class="col-sm-5">
+ <fieldset>
+    <div class="field form-group">
+      <%= f.label :attachment, "Image File", class: 'col-sm-2 control-label'  %>
+      <div class="col-sm-5">
       <%= f.file_field :attachment, class: 'form-control' %>
       <%= f.hidden_field :_destroy %>
       <%= link_to "remove", "#", class: "remove_image" %>
+      </div>
     </div>
-  </div>
 </fieldset>

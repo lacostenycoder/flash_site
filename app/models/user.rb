@@ -6,6 +6,9 @@ class User < ApplicationRecord
   validates :password, :password_confirmation, presence: true, on: :update
   validates :type, inclusion: { in: %w(Customer Admin) }
 
+  has_many :orders
+  has_many :addresses
+
   has_secure_password
 
   delegate :fullname, to: :presenter
