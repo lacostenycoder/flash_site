@@ -1,40 +1,58 @@
-<%= form_for [:admin, @deal] do |f| %>
+<%= form_for [:admin, @deal],  html: {class: 'form-horizontal'} do |f| %>
 
-  <div class="field">
-    <%= f.label :title %>
-    <%= f.text_field :title %>
+  <div class="field form-group">
+    <%= f.label :title, class: 'col-sm-2 control-label' %>
+    <div class="col-sm-5">
+      <%= f.text_field :title, class: 'form-control' %>
+      <%= error_message_on f.object, :title %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :description %>
-    <%= f.text_area :description %>
+  <div class="field form-group">
+    <%= f.label :description, class: 'col-sm-2 control-label'  %>
+    <div class="col-sm-5">
+      <%= f.text_area :description, class: 'form-control'  %>
+      <%= error_message_on f.object, :description %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :price %>
-    <%= f.number_field :price %>
+  <div class="field form-group">
+    <%= f.label :price, class: 'col-sm-2 control-label'  %>
+    <div class="col-sm-5">
+      <%= f.number_field :price, class: 'form-control'  %>
+      <%= error_message_on f.object, :price %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :discounted_price %>
-    <%= f.number_field :discounted_price %>
+  <div class="field form-group">
+    <%= f.label :discounted_price, class: 'col-sm-2 control-label'  %>
+    <div class="col-sm-5">
+      <%= f.number_field :discounted_price, class: 'form-control'  %>
+      <%= error_message_on f.object, :discounted_price %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :quantity %>
-    <%= f.number_field :quantity %>
+  <div class="field form-group">
+    <%= f.label :quantity, class: 'col-sm-2 control-label'  %>
+    <div class="col-sm-5">
+      <%= f.number_field :quantity, class: 'form-control'  %>
+      <%= error_message_on f.object, :quantity %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :publish_date %>
-    <%= f.date_select :publish_date %>
+  <div class="field form-group">
+    <%= f.label :publish_date, class: 'col-sm-2 control-label'  %>
+    <div class="col-sm-5">
+      <%= f.date_select :publish_date, class: 'form-control'  %>
+      <%= error_message_on f.object, :publish_date %>
+    </div>
   </div>
 
-  <div class="field">
+  <div class="field form-group">
     <% unless @deal.images.any? %>
-    <%= f.fields_for :images do |builder| %>
-      <%= render 'deal_images', f: builder %>
-    <% end %>
+      <%= f.fields_for :images do |builder| %>
+        <%= render 'deal_images', f: builder %>
+      <% end %>
     <% end %>
   </div>
 
@@ -45,6 +63,7 @@
   <%= link_to_add_images "Add Image", f, :images %>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: 'btn btn-primary' %>
   </div>
 <% end %>
+

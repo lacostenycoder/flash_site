@@ -1,7 +1,7 @@
-<h2>Welcome
-  <% if current_user %>
-    <%= current_user.first_name %>
-  <% else %>
-    Guest
-  <% end %>
-</h2>
+<h1>Deals</h1>
+<%= render 'deals', deals: @published_deals %>
+
+<% unless @published_deals.any? %>
+  <h1>Past deals</h1>
+  <%= render 'deals', deals: @over_deals %>
+<% end %>

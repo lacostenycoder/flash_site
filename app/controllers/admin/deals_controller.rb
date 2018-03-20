@@ -4,7 +4,7 @@ class Admin::DealsController < Admin::BaseController
   end
 
   def new
-    @deal  = Deal.new
+    @deal= Deal.new
   end
 
   def edit
@@ -32,7 +32,6 @@ class Admin::DealsController < Admin::BaseController
       flash.now[:warning] = @deal.errors[:base]
       render :edit
     end
-
   end
 
   def destroy
@@ -45,7 +44,6 @@ class Admin::DealsController < Admin::BaseController
 
   private
     def deal_params
-        params.require(:deal).permit(:title, :description, :price, :discounted_price, :quantity, :publish_date, images_attributes: [:id, :attachment, :_destroy])
+      params.require(:deal).permit(:title, :description, :price, :discounted_price, :quantity, :publish_date, images_attributes: [:id, :attachment, :_destroy])
     end
-
 end

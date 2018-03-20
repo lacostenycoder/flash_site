@@ -31,6 +31,10 @@ en:
       logged_out: 'Logged out!'
     prevent_login: 'You are already logged in'
 
+  line_items:
+    create:
+      success: "Line Item successfully added"
+
   user_mailer:
     registration_mail:
       subject: 'Welcome'
@@ -54,6 +58,8 @@ en:
       destroy:
         destroyed: "Deal successfully destroyed"
 
+
+
   activerecord:
     errors:
       models:
@@ -62,4 +68,18 @@ en:
             base:
               not_publishable: "Deal is not publishable"
               publish_date_readonly: "Publish date cannot be changed now"
+        line_item:
+          attributes:
+            base:
+              already_exists: 'Line Item already added'
 
+
+in:
+   number:
+     currency:
+        format:
+          unit: '₹'
+          delimiter: ','
+          separator: '.'
+          precision: 2
+          format: '%n %u'

@@ -5,6 +5,9 @@ class User < ApplicationRecord
   validates :email, uniqueness: true, allow_blank: true
   validates :password, :password_confirmation, presence: true, on: :update
 
+  has_many :orders
+  has_many :addresses
+
   has_secure_password
 
   before_create :set_confirm_token, unless: :user_is_admin?
@@ -32,6 +35,10 @@ class User < ApplicationRecord
 
   def nullify_reset_password_token
     update_attribute(:reset_password_token, nil)
+  end
+
+  def cart
+    orders.find_or_create_by(status: :cart)
   end
 
   private

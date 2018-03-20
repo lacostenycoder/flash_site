@@ -1,0 +1,21 @@
+.myslides {
+  background-color: black;
+}
+
+.next, .prev {
+  cursor: pointer;
+}
+
+.next {
+  float: right;
+}
+
+.myslides img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.deal-description {
+  clear: both;
+}

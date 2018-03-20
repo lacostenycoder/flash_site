@@ -1,5 +1,8 @@
 class Deal < ApplicationRecord
   has_many :images, dependent: :destroy
+  has_many :line_items
+  has_many :orders, through: :line_items
+
   accepts_nested_attributes_for :images, allow_destroy: true
 
   validates :title, :description, :price, :discounted_price, :quantity, :publish_date, presence: true
@@ -9,17 +12,25 @@ class Deal < ApplicationRecord
 
   enum state: [:non_publishable, :publishable, :published, :over]
 
+  scope :published_deals, -> { includes(:images).where(state: :published) }
+  scope :past_deals, -> { includes(:images).where(state: :over).order(publish_date: :desc) }
+
+
   def initialize_deal
     self.state = :non_publishable
     self.code = "deal-" + SecureRandom.urlsafe_base64(8)
   end
 
   def is_publishable?
-    if images.size >= 2 && quantity > 10 && deals_on_same_date < 3
-      self.state = :publishable
+    if images.size >= 2 && quantity > 10
+      if new_record? && deals_on_same_date < 2
+        self.state = :publishable
+      end
+      if !new_record? && deals_on_same_date == 2
+        return true
+      end
     end
   end
-
 
   # call when deal is published at 10am
   def set_deal_published
@@ -30,16 +41,20 @@ class Deal < ApplicationRecord
     self.update_columns(state: :over)
   end
 
+  def update_quantity
+    self.update_columns(quantity: quantity - 1)
+  end
+
 
   def check_deal_publishability
     if !is_publishable?
-      errors.add(:base, t('.not_publishable'))
+      errors.add(:base, :not_publishable)
       throw :abort
     end
 
     if published? || over?
       if publish_date_changed?
-        errors.add(:base, t('.publish_date_readonly'))
+        errors.add(:base, :publish_date_readonly)
         throw :abort
       end
     end

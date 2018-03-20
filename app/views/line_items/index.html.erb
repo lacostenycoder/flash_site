@@ -1,0 +1,41 @@
+<h3>All the deals brought by you</h3>
+
+<table class="table-bordered table-hover table">
+  <thead>
+    <tr>
+      <td>No.</td>
+      <td>Photo</td>
+      <td>Title</td>
+      <td>Price</td>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @line_items.each do |line_item| %>
+      <tr>
+        <td><%= line_item.deal.code %></td>
+        <td><%= image_tag line_item.deal.images.first.attachment.url(:thumb) %></td>
+        <td><%= line_item.deal.title %></td>
+        <td><%= line_item.deal.discounted_price %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% if @line_items.any? %>
+  <div class="amount">
+    <div class="mrp">
+      <p>MRP: <%= number_to_currency current_cart.total, locale: :in %></p>
+    </div>
+
+    <div class="discount">
+      <p>Discount: <%= number_to_currency current_cart.loyality_discount, locale: :in %></p>
+    </div>
+
+    <hr>
+
+    <div class="total">
+      <p>Total: <%= number_to_currency current_cart.total - current_cart.loyality_discount, locale: :in %></p>
+    </div>
+  </div>
+<% end %>

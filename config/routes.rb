@@ -12,8 +12,16 @@ Rails.application.routes.draw do
     patch :update_password, on: :member
   end
 
+
+  get '/buy/:id', to: 'deals#buy', as: :buy
+
+  resources :orders
+  resources :line_items
+  resources :deals
+
   namespace :admin do
     root 'dashboard#index'
     resources :users, :deals
   end
 end
+
