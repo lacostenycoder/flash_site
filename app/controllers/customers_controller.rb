@@ -5,7 +5,7 @@ class CustomersController < UsersController
   end
 
   def create
-    @user = Customer.new(user_params)
+    @user = Customer.new(customer_params)
     if @user.save
       flash[:success] = t('.success')
       redirect_to root_url
@@ -14,4 +14,10 @@ class CustomersController < UsersController
       render :new
     end
   end
+
+  private
+    def customer_params
+      params.require(:customer).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+    end
+
 end

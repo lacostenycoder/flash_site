@@ -54,7 +54,7 @@ class UsersController < ApplicationController
 
   private
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+      params.require(:user).permit(:password, :password_confirmation)
     end
 
     def redirect_when_logged_in
