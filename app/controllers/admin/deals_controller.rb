@@ -1,4 +1,6 @@
 class Admin::DealsController < Admin::BaseController
+  before_action :find_deal, only: [:edit, :update, :destroy]
+
   def index
     @deals = Deal.all
   end
@@ -8,7 +10,6 @@ class Admin::DealsController < Admin::BaseController
   end
 
   def edit
-    @deal = Deal.find(params[:id])
   end
 
   def create
@@ -24,22 +25,23 @@ class Admin::DealsController < Admin::BaseController
   end
 
   def update
-    @deal = Deal.find(params[:id])
     if @deal.update(deal_params)
       flash[:success] = t('.success')
       redirect_to admin_deals_url
     else
-      flash.now[:warning] = @deal.errors[:base]
+      flash.now[:warning] = @deal.errors[:base].to_sentence
       render :edit
     end
 
   end
 
   def destroy
-    @deal = Deal.find(params[:id])
     if @deal.destroy
-      flash[:success] = t(".destroyed")
+      flash[:success] = t(".success")
       redirect_to admin_deals_url
+    else
+      flash[:warning] = t(".failure")
+      render :index
     end
   end
 
@@ -48,4 +50,7 @@ class Admin::DealsController < Admin::BaseController
         params.require(:deal).permit(:title, :description, :price, :discounted_price, :quantity, :publish_date, images_attributes: [:id, :attachment, :_destroy])
     end
 
+    def find_deal
+      @deal = Deal.find_by(id: params[:id])
+    end
 end

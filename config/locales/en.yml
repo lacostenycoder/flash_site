@@ -57,7 +57,8 @@ en:
       update:
         success: "Deal successfully updated"
       destroy:
-        destroyed: "Deal successfully destroyed"
+        success: "Deal successfully destroyed"
+        failure: "Deal not destroyed. Try again"
 
   activerecord:
     errors:

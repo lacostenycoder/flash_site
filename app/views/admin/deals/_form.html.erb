@@ -3,44 +3,52 @@
   <div class="field">
     <%= f.label :title %>
     <%= f.text_field :title %>
+    <%= error_message_on f.object, :title %>
   </div>
 
   <div class="field">
     <%= f.label :description %>
     <%= f.text_area :description %>
+    <%= error_message_on f.object, :description %>
   </div>
 
   <div class="field">
     <%= f.label :price %>
     <%= f.number_field :price %>
+    <%= error_message_on f.object, :price %>
   </div>
 
   <div class="field">
     <%= f.label :discounted_price %>
     <%= f.number_field :discounted_price %>
+    <%= error_message_on f.object, :discounted_price %>
   </div>
 
   <div class="field">
     <%= f.label :quantity %>
     <%= f.number_field :quantity %>
+    <%= error_message_on f.object, :quantity %>
   </div>
 
   <div class="field">
     <%= f.label :publish_date %>
     <%= f.date_select :publish_date %>
+    <%= error_message_on f.object, :publish_date %>
   </div>
 
   <div class="field">
-    <% unless @deal.images.any? %>
-    <%= f.fields_for :images do |builder| %>
-      <%= render 'deal_images', f: builder %>
-    <% end %>
+      <%= f.fields_for :images do |builder| %>
+        <% unless @deal.images.any? %>
+          <%= render 'deal_images', f: builder %>
+        <% else %>
+           <fieldset>
+            <%= image_tag builder.object.attachment.url(:thumb) %>
+            <%= builder.hidden_field :_destroy %>
+            <%= link_to "remove", "#", class: "remove_image" %>
+            </fieldset>
+        <% end %>
     <% end %>
   </div>
-
-  <% @deal.images.each do |image| %>
-    <%= image_tag image.attachment.url(:thumb) %>
-  <% end %>
 
   <%= link_to_add_images "Add Image", f, :images %>
 

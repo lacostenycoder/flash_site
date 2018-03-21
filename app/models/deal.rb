@@ -1,52 +1,55 @@
 class Deal < ApplicationRecord
-  has_many :images, dependent: :destroy
+  has_many :images, as: :imageable, dependent: :destroy
   accepts_nested_attributes_for :images, allow_destroy: true
 
   validates :title, :description, :price, :discounted_price, :quantity, :publish_date, presence: true
+  validate :price_greater_than_discounted_price
+  validates :description, length: { maximum: 255, message: 'must be shorter' }
+  validate :check_state, on: :update
 
-  before_create :initialize_deal, :is_publishable?
-  before_update :check_deal_publishability
+  before_create :setup_deal
+  after_update :set_state, :update_state
+
+  scope :published_on, -> (date = Date.today){ where(publish_date: date) }
 
   enum state: [:non_publishable, :publishable, :published, :over]
 
-  def initialize_deal
-    self.state = :non_publishable
-    self.code = "deal-" + SecureRandom.urlsafe_base64(8)
+  def setup_deal
+    set_state
+    set_code
   end
 
-  def is_publishable?
-    if images.size >= 2 && quantity > 10 && deals_on_same_date < 3
-      self.state = :publishable
-    end
-  end
-
-
-  # call when deal is published at 10am
-  def set_deal_published
-    self.update_columns(state: :published)
-  end
-  # call when deal;s 24 hours are done
-  def set_deal_over
-    self.update_columns(state: :over)
-  end
-
-
-  def check_deal_publishability
-    if !is_publishable?
-      errors.add(:base, t('.not_publishable'))
-      throw :abort
-    end
-
-    if published? || over?
-      if publish_date_changed?
-        errors.add(:base, t('.publish_date_readonly'))
-        throw :abort
-      end
-    end
+  def update_state(state = self.state)
+    update_columns(state: state)
   end
 
   private
+    def is_publishable?
+      images.size >= 2 && quantity > 10 && deals_on_same_date < 3
+    end
+
+    def check_state
+      if (published? || over?) && publish_date_changed?
+        errors.add(:base, :publish_date_readonly)
+      end
+    end
+
+    def set_state
+      self.state = :non_publishable
+      if is_publishable?
+        self.state = :publishable
+      end
+    end
+
+    def set_code
+      self.code = "deal-" + SecureRandom.urlsafe_base64(8)
+    end
+
     def deals_on_same_date
-      Deal.where(publish_date: publish_date).size
+      Deal.published_on(publish_date).size
+    end
+
+    def price_greater_than_discounted_price
+      errors.add(:discounted_price, "can't be greater than price") unless price >= discounted_price
     end
 end

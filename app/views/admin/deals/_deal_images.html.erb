@@ -1,8 +1,8 @@
  <fieldset>
     <div>
-      <%= f.label :attachment, "Image File" %>
-      <%= f.file_field :attachment %>
-      <%= f.hidden_field :_destroy %>
+      <%= builder.label :attachment, "Image File" %>
+      <%= builder.file_field :attachment %>
+      <%= builder.hidden_field :_destroy %>
       <%= link_to "remove", "#", class: "remove_image" %>
     </div>
 </fieldset>
