@@ -10,7 +10,11 @@ class SessionsController < ApplicationController
       unless @user.confirm_token
         set_cookie_and_session
         flash[:success] = t('.success')
-        redirect_to root_url
+        if current_user.admin?
+          redirect_to admin_root_url
+        else
+          redirect_to root_url
+        end
       else
         flash.now[:warning] = t('.email_activation_warning')
         render :new
