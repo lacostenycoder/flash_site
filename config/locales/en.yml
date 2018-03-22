@@ -48,7 +48,7 @@ en:
       link: 'Click the link below to reset your password'
       time_expiration: 'Please note that this link will only work for 24 hours'
 
-  admin:
+  admins:
     restricted_access: 'Only Admin can access here'
     deals:
       create:

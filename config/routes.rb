@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   resources :customers, only: :create
 
-  namespace :admin do
+  namespace :admins do
     root 'dashboard#index'
     resources :users
     resources :deals

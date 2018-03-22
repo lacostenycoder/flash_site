@@ -1,4 +1,5 @@
-class Admin::DealsController < Admin::BaseController
+module Admins
+  class DealsController < BaseController
   before_action :find_deal, only: [:edit, :update, :destroy]
 
   def index
@@ -17,7 +18,7 @@ class Admin::DealsController < Admin::BaseController
     @deal.created_by = current_user.id
     if @deal.save
       flash[:success] = t('.success')
-      redirect_to admin_deals_url
+      redirect_to admins_deals_url
     else
       flash.now[:warning] = t('.failure')
       render :new
@@ -27,7 +28,7 @@ class Admin::DealsController < Admin::BaseController
   def update
     if @deal.update(deal_params)
       flash[:success] = t('.success')
-      redirect_to admin_deals_url
+      redirect_to admins_deals_url
     else
       flash.now[:warning] = @deal.errors[:base].to_sentence
       render :edit
@@ -38,7 +39,7 @@ class Admin::DealsController < Admin::BaseController
   def destroy
     if @deal.destroy
       flash[:success] = t(".success")
-      redirect_to admin_deals_url
+      redirect_to admins_deals_url
     else
       flash[:warning] = t(".failure")
       render :index
@@ -53,4 +54,5 @@ class Admin::DealsController < Admin::BaseController
     def find_deal
       @deal = Deal.find_by(id: params[:id])
     end
+  end
 end

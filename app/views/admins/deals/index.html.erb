@@ -1,6 +1,6 @@
 <h1 class="heading">Deals</h1>
 
-<%= link_to 'New', new_admin_deal_url, class: 'new_link' %>
+<%= link_to 'New', new_admins_deal_url, class: 'new_link' %>
 <table class="table">
   <thead>
     <tr>
@@ -17,11 +17,11 @@
     <% @deals.each do |deal| %>
       <tr>
         <td><%= deal.id %></td>
-        <td><%= link_to deal.title, edit_admin_deal_url(deal) %></td>
+        <td><%= link_to deal.title, edit_admins_deal_url(deal) %></td>
         <td><%= deal.description %></td>
         <td><%= deal.publish_date %></td>
         <td><%= deal.state %></td>
-        <td><%= link_to 'Destroy', admin_deal_url(deal), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy', admins_deal_url(deal), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
