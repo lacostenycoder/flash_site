@@ -1,49 +1,56 @@
-<h1>Sign Up</h1>
+  <div class="row vertical-offset-100">
+    <div class="col-md-8 col-sm-offset-2">
+      <div class="panel panel-default">
+          <div class="panel-heading"><span class="glyphicon glyphicon-home"></span> Sign Up</div>
+          <div class="panel-body">
+            <%= form_for @user,  html: {class: 'form-horizontal'} do |f| %>
+              <div class="field form-group">
+                <%= f.label :first_name, class: 'col-sm-4 control-label' %>
+                <div class="col-sm-5">
+                  <%= f.text_field :first_name, placeholder: 'First Name', class: 'form-control' %>
+                  <%= error_message_on f.object, :first_name %>
+                </div>
+              </div>
 
-<%= form_for @user,  html: {class: 'form-horizontal'} do |f| %>
-  <div class="field form-group">
-    <%= f.label :first_name, class: 'col-sm-2 control-label' %>
-    <div class="col-sm-5">
-      <%= f.text_field :first_name, class: 'form-control' %>
-      <%= error_message_on f.object, :first_name %>
-    </div>
-  </div>
+              <div class="field form-group">
+                <%= f.label :last_name, class: 'col-sm-4 control-label' %>
+                <div class="col-sm-5">
+                  <%= f.text_field :last_name, placeholder: 'Last Name', class: 'form-control' %>
+                  <%= error_message_on f.object, :last_name %>
+                </div>
+              </div>
 
-  <div class="field form-group">
-    <%= f.label :last_name, class: 'col-sm-2 control-label' %>
-    <div class="col-sm-5">
-      <%= f.text_field :last_name, class: 'form-control' %>
-      <%= error_message_on f.object, :last_name %>
-    </div>
-  </div>
+              <div class="field form-group">
+                <%= f.label :email, class: 'col-sm-4 control-label' %>
+                <div class="col-sm-5">
+                  <%= f.text_field :email, placeholder: 'Email', class: 'form-control' %>
+                  <%= error_message_on f.object, :email %>
+                </div>
+              </div>
 
-  <div class="field form-group">
-    <%= f.label :email, class: 'col-sm-2 control-label' %>
-    <div class="col-sm-5">
-      <%= f.text_field :email, class: 'form-control' %>
-      <%= error_message_on f.object, :email %>
-    </div>
-  </div>
+              <div class="field form-group">
+                <%= f.label :password, class: 'col-sm-4 control-label' %>
+                <div class="col-sm-5">
+                  <%= f.password_field :password, placeholder: 'Password', class: 'form-control' %>
+                  <%= error_message_on f.object, :password %>
+                </div>
+              </div>
 
-  <div class="field form-group">
-    <%= f.label :password, class: 'col-sm-2 control-label' %>
-    <div class="col-sm-5">
-      <%= f.password_field :password, class: 'form-control' %>
-      <%= error_message_on f.object, :password %>
-    </div>
-  </div>
+              <div class="field form-group">
+                <%= f.label :password_confirmation, class: 'col-sm-4 control-label' %>
+                <div class="col-sm-5">
+                  <%= f.password_field :password_confirmation, placeholder: 'Password Confirmation', class: 'form-control' %>
+                  <%= error_message_on f.object, :password_confirmation %>
+                </div>
+              </div>
 
-  <div class="field form-group">
-    <%= f.label :password_confirmation, class: 'col-sm-2 control-label' %>
-    <div class="col-sm-5">
-      <%= f.password_field :password_confirmation, class: 'form-control' %>
-      <%= error_message_on f.object, :password_confirmation %>
+              <div class="actions form-group">
+                <div class="col-sm-offset-4 col-sm-8">
+                  <%= f.submit t('signup'), class: 'btn btn-primary' %>
+                </div>
+              </div>
+            <% end %>
+        </div>
+      </div>
     </div>
-  </div>
-
-  <div class="actions form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <%= f.submit t('signup'), class: 'btn btn-primary' %>
-    </div>
-  </div>
-<% end %>
+</div>

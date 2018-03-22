@@ -7,8 +7,7 @@ class CustomersController < UsersController
   def create
     @user = Customer.new(customer_params)
     if @user.save
-      flash[:success] = t('.success')
-      redirect_to root_url
+      redirect_to root_url, flash: { success: t('.success') }
     else
       flash.now[:info] = t('.failure')
       render :new
