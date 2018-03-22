@@ -28,15 +28,13 @@ class SessionsController < ApplicationController
   def destroy
     session[:user_id] = nil
     cookies.delete :user_id
-    flash[:success] = t('.logged_out')
-    redirect_to root_url
+    redirect_to root_url, flash: { success: t('.logged_out') }
   end
 
   private
     def redirect_when_logged_in
       if current_user
-        flash[:warning] = t('sessions.prevent_login')
-        redirect_to root_url
+        redirect_to root_url, flash: { warning: t('sessions.prevent_login') }
       end
     end
 
