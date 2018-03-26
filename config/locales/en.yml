@@ -51,6 +51,7 @@ en:
   admins:
     restricted_access: 'Only Admin can access here'
     deals:
+      not_found: 'Deal not found'
       create:
         success: "Deal successfully created"
         failure: "Deal not created. Try again"
@@ -65,6 +66,8 @@ en:
       models:
         deal:
           attributes:
+            discounted_price:
+              dicount_price_greater: "can't be greater than price"
             base:
               not_publishable: "Deal is not publishable"
               publish_date_readonly: "Publish date cannot be changed now"
