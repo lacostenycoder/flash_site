@@ -7,6 +7,7 @@
       <th>Id</th>
       <th>Title</th>
       <th>Description</th>
+      <th>Image</th>
       <th>Publish Date</th>
       <th>State</th>
       <th colspan="1"></th>
@@ -19,6 +20,7 @@
         <td><%= deal.id %></td>
         <td><%= link_to deal.title, edit_admins_deal_url(deal) %></td>
         <td><%= deal.description %></td>
+        <td><%= show_first_image deal %></td>
         <td><%= deal.publish_date %></td>
         <td><%= deal.state %></td>
         <td><%= link_to 'Destroy', admins_deal_url(deal), method: :delete, data: { confirm: 'Are you sure?' } %></td>

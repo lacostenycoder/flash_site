@@ -3,7 +3,7 @@ module Admins
     before_action :find_deal, only: [:edit, :update, :destroy]
 
     def index
-      @deals = Deal.all
+      @deals = Deal.includes(:images)
     end
 
     def new
@@ -39,7 +39,7 @@ module Admins
         flash[:success] = t(".success")
         redirect_to admins_deals_url
       else
-        flash[:warning] = t(".failure")
+        flash.now[:warning] = t(".failure")
         render :index
       end
     end

@@ -39,7 +39,7 @@
   <div class="field">
       <%= f.fields_for :images do |builder| %>
         <% unless @deal.images.any? %>
-          <%= render 'deal_images', f: builder %>
+          <%= render 'images', f: builder %>
         <% else %>
            <fieldset>
             <%= image_tag builder.object.attachment.url(:thumb) %>
@@ -50,9 +50,10 @@
     <% end %>
   </div>
 
-  <%= link_to_add_images "Add Image", f, :images %>
+  <%= link_to_add_images "add_images", f, :images %>
 
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+<%= javascript_include_tag 'admins/deals/form' %>

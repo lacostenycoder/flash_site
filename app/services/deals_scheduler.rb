@@ -1,21 +1,22 @@
 class DealsScheduler
-  def self.publish(date)
-    @date = date || Date.current
-    publish_todays_deals
-    unpublish_old_deals
+  def initialize(date)
+    @date = date
+    @present_deals = Deal.published_on(@date).publishable
+    @old_deals = Deal.published_on(@date - 1).published
+end
+
+  def publish
+    update_deals(@old_deals, :over)
+    update_deals(@present_deals, :published)
   end
 
-  def self.publish_todays_deals
-    @deals = Deal.published_on(@date).publishable
-    @deals.each do |deal|
-      deal.update_state(:published)
+  def update_deals(deals, state)
+    deals.each do |deal|
+      deal.update_columns(state: state)
     end
   end
 
-  def self.unpublish_old_deals
-    @deals = Deal.published_on(@date- 1).published
-    @deals.each do |deal|
-      deal.update_state(:over)
-    end
+  def self.publish(date = Date.current)
+    new(date).publish
   end
 end

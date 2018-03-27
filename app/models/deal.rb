@@ -19,8 +19,7 @@ class Deal < ApplicationRecord
     set_code
   end
 
-  def update_state(state_arg)
-    state = state_arg || set_state
+  def update_state(state = set_state)
     update_columns(state: state)
   end
 
