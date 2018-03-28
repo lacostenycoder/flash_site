@@ -5,7 +5,7 @@ $(document).ready(function(){
     body: $('body'),
     remove_class: '.remove_image',
     add_class: '.add_images'
-  }
+  };
   var imageUploader = new MultipleFilesUploader(domElements);
   imageUploader.init();
 });

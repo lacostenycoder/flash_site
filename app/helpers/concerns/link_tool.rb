@@ -1,4 +1,4 @@
-module FileLink
+module LinkTool
   def add_file(class_name, form, association)
     name = class_name.split('_').map(&:capitalize).join(' ')
     partial = class_name.split('_').last

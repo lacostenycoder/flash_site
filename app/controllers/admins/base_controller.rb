@@ -1,7 +1,7 @@
 module Admins
   class BaseController < ApplicationController
-  layout 'admin'
-  before_action :ensure_admin
+    layout 'admin'
+    before_action :ensure_admin
 
     private
       def ensure_admin

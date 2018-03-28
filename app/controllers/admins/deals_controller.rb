@@ -36,10 +36,10 @@ module Admins
 
     def destroy
       if @deal.destroy
-        flash[:success] = t(".success")
+        flash[:success] = t('.success')
         redirect_to admins_deals_url
       else
-        flash.now[:warning] = t(".failure")
+        flash.now[:warning] = t('.failure')
         render :index
       end
     end

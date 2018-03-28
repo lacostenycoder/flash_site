@@ -2,7 +2,7 @@ function MultipleFilesUploader(domElements){
   this.body = domElements.body;
   this.remove_class = domElements.remove_class;
   this.add_class = domElements.add_class;
-};
+}
 
 MultipleFilesUploader.prototype.init = function(){
   this.onRemoveButtonClick();
@@ -21,8 +21,8 @@ MultipleFilesUploader.prototype.onRemoveButtonClick =function(){
 MultipleFilesUploader.prototype.onAddButtonClick = function(){
   this.body.on("click", this.add_class, function(event){
     var $this = $(this);
-    time = new Date().getTime();
-    regexp = new RegExp($this.data('id'), 'g');
+    var time = new Date().getTime();
+    var regexp = new RegExp($this.data('id'), 'g');
     $this.before($this.data('fields').replace(regexp, time));
     event.preventDefault();
   });

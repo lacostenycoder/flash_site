@@ -1,6 +1,6 @@
 module DealsHelper
   extend ActiveSupport::Concern
-  include FileLink
+  include LinkTool
 
   def link_to_add_images(class_name, form, association)
     add_file(class_name, form, association)
