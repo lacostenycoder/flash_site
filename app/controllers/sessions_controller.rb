@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
         set_cookie_and_session
         flash[:success] = t('.success')
         if current_user.admin?
-          redirect_to admins_root_url
+          redirect_to admin_root_url
         else
           redirect_to root_url
         end

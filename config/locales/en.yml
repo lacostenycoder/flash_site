@@ -48,27 +48,5 @@ en:
       link: 'Click the link below to reset your password'
       time_expiration: 'Please note that this link will only work for 24 hours'
 
-  admins:
+  admin:
     restricted_access: 'Only Admin can access here'
-    deals:
-      not_found: 'Deal not found'
-      create:
-        success: "Deal successfully created"
-        failure: "Deal not created. Try again"
-      update:
-        success: "Deal successfully updated"
-      destroy:
-        success: "Deal successfully destroyed"
-        failure: "Deal not destroyed. Try again"
-
-  activerecord:
-    errors:
-      models:
-        deal:
-          attributes:
-            discounted_price:
-              dicount_price_greater: "can't be greater than price"
-            base:
-              not_publishable: "Deal is not publishable"
-              publish_date_readonly: "Publish date cannot be changed now"
-
