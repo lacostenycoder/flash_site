@@ -7,11 +7,9 @@ class UsersController < ApplicationController
 
   def confirm_email
     if @user && @user.activate_email
-      flash[:success] = t('.success')
-      redirect_to login_url
+      redirect_to login_url, flash: { success: t('.success') }
     else
-      flash[:warning] = t('.failure')
-      redirect_to root_url
+      redirect_to root_url, flash: {warning: t('.failure')}
     end
   end
 
@@ -20,8 +18,7 @@ class UsersController < ApplicationController
 
   def send_reset_password_email
     if @user && @user.send_forgot_password_email
-      flash[:success] = t('.email_instructions')
-      redirect_to login_url
+      redirect_to login_url, flash: { success: t('.email_instructions') }
     else
       flash.now[:warning] = t('.no_email')
       render 'forgot_password'
@@ -31,21 +28,19 @@ class UsersController < ApplicationController
   def reset_password
     if @user && @user.nullify_reset_password_token
       if @user.reset_password_link_expired?
-        flash[:warning] = t('.password_link_expired')
-        redirect_to  login_url
+        redirect_to  login_url, flash: { warning: t('.password_link_expired') }
       else
+        flash.now[:success] = t('.reset')
         render 'reset_password'
       end
     else
-      flash[:warning] = t('.user_not_recognised')
-      redirect_to login_url
+      redirect_to login_url, flash: { warning: t('.user_not_recognised') }
     end
   end
 
   def update_password
     if @user.update(user_params)
-      flash[:success] = t('.success')
-      redirect_to login_url
+      redirect_to login_url, flash: { success: t('.success') }
     else
       flash.now[:warning] = t('.failure')
       render 'reset_password'
@@ -59,8 +54,7 @@ class UsersController < ApplicationController
 
     def redirect_when_logged_in
       if current_user
-        flash[:warning] = t('users.prevent_signup')
-        redirect_to root_url
+        redirect_to root_url, flash: { warning: t('users.prevent_signup') }
       end
     end
 
