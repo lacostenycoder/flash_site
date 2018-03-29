@@ -1,0 +1,11 @@
+/*
+*= require_self
+*= require_tree .
+*/
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+.content {
+  overflow: hidden;
+}

@@ -1,4 +1,6 @@
-class Admin::BaseController < ApplicationController
+module Admins
+  class BaseController < ApplicationController
+    layout 'admin'
     before_action :ensure_admin
 
     private
@@ -8,4 +10,5 @@ class Admin::BaseController < ApplicationController
           redirect_to root_url
         end
       end
+  end
 end
