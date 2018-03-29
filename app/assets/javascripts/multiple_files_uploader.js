@@ -9,7 +9,7 @@ MultipleFilesUploader.prototype.init = function(){
   this.onAddButtonClick();
 };
 
-MultipleFilesUploader.prototype.onRemoveButtonClick =function(){
+MultipleFilesUploader.prototype.onRemoveButtonClick = function(){
   this.body.on("click", this.remove_class, function(event){
     var $this = $(this);
     $this.prev('input[type=hidden]').val('1');

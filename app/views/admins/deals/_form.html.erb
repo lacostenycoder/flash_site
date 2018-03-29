@@ -37,16 +37,16 @@
   </div>
 
   <div class="field">
-      <%= f.fields_for :images do |builder| %>
-        <% unless @deal.images.any? %>
-          <%= render 'images', f: builder %>
-        <% else %>
-           <fieldset>
-            <%= image_tag builder.object.attachment.url(:thumb) %>
-            <%= builder.hidden_field :_destroy %>
-            <%= link_to "remove", "#", class: "remove_image" %>
-            </fieldset>
-        <% end %>
+    <%= f.fields_for :images do |builder| %>
+      <% unless @deal.images.any? %>
+        <%= render 'images', f: builder %>
+      <% else %>
+        <fieldset>
+          <%= image_tag builder.object.attachment.url(:thumb) %>
+          <%= builder.hidden_field :_destroy %>
+          <%= link_to "remove", "#", class: "remove_image" %>
+        </fieldset>
+      <% end %>
     <% end %>
   </div>
 

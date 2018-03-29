@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     if @user && @user.activate_email
       redirect_to login_url, flash: { success: t('.success') }
     else
-      redirect_to root_url, flash: {warning: t('.failure')}
+      redirect_to root_url, flash: { warning: t('.failure') }
     end
   end
 

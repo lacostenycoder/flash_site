@@ -14,7 +14,7 @@
         <%= link_to 'Flash Site', root_url, class: "navbar-brand" %>
       </div>
       <div class="nav navbar-nav navbar-right">
-        <li class="navbar-text"><strong id= "user_name"><%= current_user.first_name.capitalize %></strong> </li>
+        <li class="navbar-text"><strong id="user_name"><%= current_user.first_name.capitalize %></strong> </li>
         <li><%= link_to "Logout", logout_path %></li>
       </div>
     </div>
@@ -31,9 +31,9 @@
 
         <div class="col-xs-10 main">
           <div>
-              <% flash.each do |name, msg| %>
-                <%= content_tag :div, msg, class: "alert alert-#{name}" %>
-              <% end %>
+            <% flash.each do |name, msg| %>
+              <%= content_tag :div, msg, class: "alert alert-#{name}" %>
+            <% end %>
           </div>
           <div class="content">
             <%= yield %>

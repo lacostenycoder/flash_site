@@ -16,8 +16,7 @@ module Admins
     def create
       @deal = Deal.new(deal_params.merge(created_by: current_user.id))
       if @deal.save
-        flash[:success] = t('.success')
-        redirect_to admins_deals_url
+        redirect_to admins_deals_url, flash: { success: t('.success') }
       else
         flash.now[:warning] = t('.failure')
         render :new
@@ -26,8 +25,7 @@ module Admins
 
     def update
       if @deal.update(deal_params)
-        flash[:success] = t('.success')
-        redirect_to admins_deals_url
+        redirect_to admins_deals_url, flash: { success: t('.success') }
       else
         flash.now[:warning] = @deal.errors[:base].to_sentence
         render :edit
@@ -36,8 +34,7 @@ module Admins
 
     def destroy
       if @deal.destroy
-        flash[:success] = t('.success')
-        redirect_to admins_deals_url
+        redirect_to admins_deals_url, flash: { success: t('.success') }
       else
         flash.now[:warning] = t('.failure')
         render :index
@@ -46,14 +43,13 @@ module Admins
 
     private
       def deal_params
-          params.require(:deal).permit(:title, :description, :price, :discounted_price, :quantity, :publish_date, images_attributes: [:id, :attachment, :_destroy])
+        params.require(:deal).permit(:title, :description, :price, :discounted_price, :quantity, :publish_date, images_attributes: [:id, :attachment, :_destroy])
       end
 
       def find_deal
         @deal = Deal.find_by(id: params[:id])
         unless @deal
-          flash[:warning] = t('deals.not_found')
-          redirect_to admins_deals_path
+          redirect_to admins_deals_path, flash: { warning: t('deals.not_found') }
         end
       end
   end
