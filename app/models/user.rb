@@ -37,5 +37,12 @@ class User < ApplicationRecord
 
   def admin?
     type == 'Admin'
+
+  def cart
+    orders.find_or_create_by(state: :cart)
+  end
+
+  def addressed_cart
+    orders.find_by(state: :address)
   end
 end

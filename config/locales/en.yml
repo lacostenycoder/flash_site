@@ -41,6 +41,7 @@ en:
     prevent_login: 'You are already logged in'
 
   line_items:
+    login_first: 'Login to create a cart'
     create:
       success: "Line Item successfully added"
 
@@ -56,7 +57,15 @@ en:
       link: 'Click the link below to reset your password'
       time_expiration: 'Please note that this link will only work for 24 hours'
 
-  admins:
+  payment_mailer:
+    successful_payment:
+      subject: 'Successful payment'
+      content: 'Your order has been successfully paid. Your order will be shipped soon'
+    failed_payment:
+      subject: 'Payment failed'
+      content: 'Your order has been not paid. Please try again'
+
+  admin:
     restricted_access: 'Only Admin can access here'
     deals:
       not_found: 'Deal not found'
@@ -69,7 +78,15 @@ en:
         success: "Deal successfully destroyed"
         failure: "Deal not destroyed. Try again"
 
+  addresses:
+    create:
+      success: 'Address successfully created'
+      failure: 'Address wasn\'t saved. Try again'
 
+  payments:
+    create:
+      success: "Your order has been successfully created"
+    choose_address: 'Choose an address first'
 
   activerecord:
     errors:

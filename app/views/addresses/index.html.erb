@@ -1,0 +1,14 @@
+<h1>Select an address</h1>
+
+<%= form_tag submit_addresses_path do %>
+  <%= collection_radio_buttons :address, :id, @addresses, :id, :full_address  do |b| %>
+    <div class="radio">
+      <%= b.label do %>
+        <%= b.radio_button + b.text %>
+      <% end %>
+    </div>
+  <% end %>
+  <%= link_to 'Add Address', new_address_path %>
+  <%= submit_tag %>
+<% end %>
+

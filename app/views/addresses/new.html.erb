@@ -1,0 +1,55 @@
+<%= form_for @address, html: { class: 'form-horizontal' } do |f| %>
+  <div class="field form-group">
+    <%= f.label :street1, class: 'col-sm-2 control-label' %>
+    <div class="col-sm-5">
+      <%= f.text_field :street1, class: 'form-control' %>
+      <%= error_message_on f.object, :street1 %>
+    </div>
+  </div>
+
+  <div class="field form-group">
+    <%= f.label :street2, class: 'col-sm-2 control-label' %>
+    <div class="col-sm-5">
+      <%= f.text_field :street2, class: 'form-control' %>
+      <%= error_message_on f.object, :street2 %>
+    </div>
+  </div>
+
+  <div class="field form-group">
+    <%= f.label :city, class: 'col-sm-2 control-label' %>
+    <div class="col-sm-5">
+      <%= f.text_field :city, class: 'form-control' %>
+      <%= error_message_on f.object, :city %>
+    </div>
+  </div>
+
+  <div class="field form-group">
+    <%= f.label :state, class: 'col-sm-2 control-label' %>
+    <div class="col-sm-5">
+      <%= f.grouped_collection_select :state_id, @countries, :states, :name, :id, :name, include_blank: true %>
+      <%= error_message_on f.object, :state %>
+    </div>
+  </div>
+
+  <div class="field form-group">
+    <%= f.label :country, class: 'col-sm-2 control-label' %>
+    <div class="col-sm-5">
+      <%= f.collection_select :country_id, @countries, :id, :name, prompt: true %>
+      <%= error_message_on f.object, :country %>
+    </div>
+  </div>
+
+  <div class="field form-group">
+    <%= f.label :pincode, class: 'col-sm-2 control-label' %>
+    <div class="col-sm-5">
+      <%= f.text_field :pincode, class: 'form-control' %>
+      <%= error_message_on f.object, :pincode %>
+    </div>
+  </div>
+
+  <div class="actions form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= submit_tag 'Create', class: 'btn btn-primary' %>
+    </div>
+  </div>
+<% end %>

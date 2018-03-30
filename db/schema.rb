@@ -75,12 +75,25 @@ ActiveRecord::Schema.define(version: 2018_03_22_121024) do
     t.decimal "total", precision: 10, default: "0"
     t.decimal "loyality_discount", precision: 10, default: "0"
     t.bigint "user_id"
-    t.integer "status"
     t.bigint "address_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "state"
     t.index ["address_id"], name: "index_orders_on_address_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "payments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "card_token"
+    t.bigint "user_id"
+    t.decimal "amount", precision: 10, default: "0"
+    t.string "failure_message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "state"
+    t.bigint "order_id"
+    t.index ["order_id"], name: "index_payments_on_order_id"
+    t.index ["user_id"], name: "index_payments_on_user_id"
   end
 
   create_table "states", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -89,26 +102,6 @@ ActiveRecord::Schema.define(version: 2018_03_22_121024) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["country_id"], name: "index_states_on_country_id"
-  end
-
-  create_table "line_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "order_id"
-    t.bigint "deal_id"
-    t.decimal "price", precision: 10
-    t.index ["deal_id"], name: "index_line_items_on_deal_id"
-    t.index ["order_id"], name: "index_line_items_on_order_id"
-  end
-
-  create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.decimal "total", precision: 10, default: "0"
-    t.decimal "loyality_discount", precision: 10
-    t.bigint "user_id"
-    t.integer "status"
-    t.bigint "address_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["address_id"], name: "index_orders_on_address_id"
-    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

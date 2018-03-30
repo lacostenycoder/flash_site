@@ -1,0 +1,27 @@
+<h1>All orders</h1>
+
+<table class="table">
+  <thead>
+    <th>Id</th>
+    <th>MRP</th>
+    <th>Loyality Discount</th>
+    <th>Customer</th>
+    <th>Customers Address</th>
+    <th>Orders state</th>
+    <th>Ship?</th>
+  </thead>
+
+  <tbody>
+    <% @orders.each do |order| %>
+    <tr>
+      <td><%= order.id %></td>
+      <td><%= order.total %></td>
+      <td><%= order.loyality_discount %></td>
+      <td><%= order.user.first_name %></td>
+      <td><%= Address.find_by(id: order.address_id).full_address if order.address_id %></td>
+      <td><%= order.state %></td>
+      <td></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

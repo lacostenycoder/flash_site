@@ -19,11 +19,17 @@ Rails.application.routes.draw do
   resources :orders
   resources :line_items
   resources :deals
+  resources :addresses do
+    post :submit, on: :collection
+  end
+
+  resources :payments
 
   namespace :admins do
     root 'dashboard#index'
     resources :users
     resources :deals
+    resources :orders
   end
 end
 
