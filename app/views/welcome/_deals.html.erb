@@ -6,7 +6,7 @@
         <div class="slideshow-container center-block">
           <% deal.images.each do |image| %>
             <div class="myslides">
-              <%= image_tag image.attachment.url(:medium) %>
+               <%= image_tag image.attachment.url(:medium) %>
             </div>
           <% end %>
         </div>

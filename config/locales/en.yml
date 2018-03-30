@@ -81,7 +81,7 @@ en:
   addresses:
     create:
       success: 'Address successfully created'
-      failure: 'Address wasn\'t saved. Try again'
+      failure: 'Address was not saved. Try again'
 
   payments:
     create:
@@ -103,13 +103,12 @@ en:
             base:
               already_exists: 'Line Item already added'
 
-
 in:
-   number:
-     currency:
-        format:
-          unit: '₹'
-          delimiter: ','
-          separator: '.'
-          precision: 2
-          format: '%n %u'
+  number:
+    currency:
+      format:
+        unit: '₹'
+        delimiter: ','
+        separator: '.'
+        precision: 2
+        format: '%n %u'
