@@ -1,6 +1,6 @@
 class Deal < ApplicationRecord
   has_many :images, dependent: :destroy
-  has_many :line_items
+  has_many :line_items, dependent: :destroy
   has_many :orders, through: :line_items
 
   accepts_nested_attributes_for :images, allow_destroy: true

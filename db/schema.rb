@@ -10,24 +10,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_03_19_071834) do
+ActiveRecord::Schema.define(version: 2018_03_29_083709) do
 
   create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
-    t.string "location"
+    t.bigint "country_id"
+    t.bigint "state_id"
+    t.string "city"
+    t.string "street1"
+    t.string "street2"
+    t.string "pincode"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["country_id"], name: "index_addresses_on_country_id"
+    t.index ["state_id"], name: "index_addresses_on_state_id"
     t.index ["user_id"], name: "index_addresses_on_user_id"
+  end
+
+  create_table "countries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "deals", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.string "description"
-    t.decimal "price", precision: 10
-    t.decimal "discounted_price", precision: 10
+    t.decimal "price", precision: 10, default: "0"
+    t.decimal "discounted_price", precision: 10, default: "0"
     t.integer "quantity"
     t.date "publish_date"
     t.integer "state"
     t.string "code"
     t.bigint "created_by"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -36,27 +53,55 @@ ActiveRecord::Schema.define(version: 2018_03_19_071834) do
     t.string "attachment_content_type"
     t.integer "attachment_file_size"
     t.datetime "attachment_updated_at"
+    t.integer "imageable_id"
+    t.string "imageable_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["deal_id"], name: "index_images_on_deal_id"
+    t.index ["imageable_id", "imageable_type"], name: "index_images_on_imageable_id_and_imageable_type"
   end
 
   create_table "line_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "order_id"
     t.bigint "deal_id"
-    t.decimal "price", precision: 10
+    t.decimal "price", precision: 10, default: "0"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["deal_id"], name: "index_line_items_on_deal_id"
     t.index ["order_id"], name: "index_line_items_on_order_id"
   end
 
   create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.decimal "total", precision: 10, default: "0"
-    t.decimal "loyality_discount", precision: 10
+    t.decimal "loyality_discount", precision: 10, default: "0"
     t.bigint "user_id"
-    t.integer "status"
     t.bigint "address_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "state"
     t.index ["address_id"], name: "index_orders_on_address_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "payments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "card_token"
+    t.bigint "user_id"
+    t.decimal "amount", precision: 10, default: "0"
+    t.string "failure_message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "state"
+    t.bigint "order_id"
+    t.index ["order_id"], name: "index_payments_on_order_id"
+    t.index ["user_id"], name: "index_payments_on_user_id"
+  end
+
+  create_table "states", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.bigint "country_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["country_id"], name: "index_states_on_country_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

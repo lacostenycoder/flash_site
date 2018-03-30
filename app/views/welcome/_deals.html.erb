@@ -18,7 +18,11 @@
             <%= hidden_field_tag :deal_id, deal.id %>
             <%= hidden_field_tag :price, deal.discounted_price %>
             <div class="deal-buy pull-right">
-              <%= submit_tag "Buy" %>
+              <% if deal.quantity == 0 %>
+                <p>SOLD OUT</p>
+              <% else %>
+                <%= submit_tag "Buy" %>
+              <% end %>
             </div>
           <% end %>
 

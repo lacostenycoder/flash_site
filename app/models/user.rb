@@ -38,7 +38,11 @@ class User < ApplicationRecord
   end
 
   def cart
-    orders.find_or_create_by(status: :cart)
+    orders.find_or_create_by(state: :cart)
+  end
+
+  def addressed_cart
+    orders.find_by(state: :address)
   end
 
   private

@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_cart
-    @current_cart ||= current_user.cart
+    @current_cart ||= (current_user.addressed_cart || current_user.cart) if current_user
   end
-
 end
+

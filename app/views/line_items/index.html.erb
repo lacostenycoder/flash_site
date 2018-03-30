@@ -2,12 +2,11 @@
 
 <table class="table-bordered table-hover table">
   <thead>
-    <tr>
-      <td>No.</td>
-      <td>Photo</td>
-      <td>Title</td>
-      <td>Price</td>
-    </tr>
+    <th>No.</th>
+    <th>Photo</th>
+    <th>Title</th>
+    <th>Price</th>
+    <th>Quantity</th>
   </thead>
 
   <tbody>
@@ -17,6 +16,7 @@
         <td><%= image_tag line_item.deal.images.first.attachment.url(:thumb) %></td>
         <td><%= line_item.deal.title %></td>
         <td><%= line_item.deal.discounted_price %></td>
+        <td><%= line_item.deal.quantity %></td>
       </tr>
     <% end %>
   </tbody>
@@ -38,4 +38,8 @@
       <p>Total: <%= number_to_currency current_cart.total - current_cart.loyality_discount, locale: :in %></p>
     </div>
   </div>
+
+  <%= link_to 'Checkout', addresses_path %>
 <% end %>
+
+

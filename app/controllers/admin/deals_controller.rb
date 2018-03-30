@@ -1,6 +1,6 @@
 class Admin::DealsController < Admin::BaseController
   def index
-    @deals = Deal.all
+    @deals = Deal.includes(:images)
   end
 
   def new
