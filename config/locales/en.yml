@@ -65,7 +65,7 @@ en:
       subject: 'Payment failed'
       content: 'Your order has been not paid. Please try again'
 
-  admin:
+  admins:
     restricted_access: 'Only Admin can access here'
     deals:
       not_found: 'Deal not found'

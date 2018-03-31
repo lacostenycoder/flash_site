@@ -1,7 +1,7 @@
-<h1>Deals</h1>
-<%= render 'deals', deals: @published_deals %>
-
-<% unless @published_deals.any? %>
-  <h1>Past deals</h1>
-  <%= render 'deals', deals: @over_deals %>
+<% if @published_deals.exists? %>
+  <h1>Present Deals</h1>
+  <%= render 'deals', deals: @published_deals %>
+<% else %>
+  <h1>Past Deals</h1>
+  <%= render 'deals', deals: @past_deals if @past_deals.exists? %>
 <% end %>

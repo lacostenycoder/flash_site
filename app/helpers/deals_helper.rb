@@ -13,4 +13,5 @@ module DealsHelper
       image_tag 'no_image_found'
     end
   end
+
 end
